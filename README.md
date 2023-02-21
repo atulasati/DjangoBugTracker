@@ -1,0 +1,2 @@
+# DjangoBugTracker
+django project
