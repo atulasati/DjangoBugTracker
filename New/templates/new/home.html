@@ -1,0 +1,189 @@
+{% extends 'new/base.html' %}
+{% block title %}Home Page{% endblock title %}
+{% block main_content %}
+
+
+<!--user panel-->
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>User</h2>
+                </div>
+                <div class="col-sm-6">
+                    <a href="{% url 'add-user' %}" class="btn btn-success" > <span>Add New User</span></a>						
+                </div>
+            </div>
+        </div>
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Sno</th>
+                    <th>User Id</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in userdata %}                
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.userid}}</td>
+                    <td>{{i.name}}</td>
+                    <td>{{i.city}}</td>
+                    <td class="aline-inline">
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="{% url 'edit-user' i.userid %}" class="btn btn-info btn-sm">Edit</a>
+                                </td>
+                            </tr>
+                        </table>
+                        <form action="{%url 'delete-user' %}" method="POST">
+                            {%csrf_token%}
+                            <input type="hidden" name="id" value={{i.userid}}>
+                            <input TYPE="Submit" value="Delete" class="btn btn-sm btn-danger">
+                        </form>
+                    </td>
+                    
+                    
+                </tr>
+                {% endfor %}
+
+                
+                 
+            </tbody>
+        </table>
+        
+    </div>
+
+</div>
+
+
+
+
+
+
+<!--Task panel-->
+
+
+
+
+
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Task</h2>
+                </div>
+                <div class="col-sm-6">
+                    <a href="{% url 'add-task' %}" class="btn btn-success" > <span>Add New Task</span></a>						
+                </div>
+            </div>
+        </div>
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Sno</th>
+                    <th>Title</th>
+                    <th>Task No.</th>
+                    <th>Status</th>
+                    <th>Details</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stud in taskdata %}                
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{stud.title}}</td>
+                    <td>{{stud.tasknum}}</td>
+                    <td>{{stud.status}}</td>
+                    <td>{{stud.details}}</td>
+                    <td class="aline-inline">
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="{% url 'edit-task' stud.id %}" class="btn btn-info btn-sm">Edit</a>
+                                </td>
+                            </tr>
+                        </table>
+                        <form action="{%url 'delete-task' %}" method="POST">
+                            {%csrf_token%}
+                            <input type="hidden" name="id" value={{stud.id}}>
+                            <input TYPE="Submit" value="Delete" class="btn btn-sm btn-danger">
+                        </form>
+                    </td>
+                    
+                    
+                </tr>
+                {% endfor %}
+
+                
+                 
+            </tbody>
+        </table>
+        
+    </div>
+</div>
+
+<!--Role Area/section-->
+
+
+
+<div class="container">
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Role</h2>
+                </div>
+                <div class="col-sm-6">
+                    <a href="{% url 'add-role' %}" class="btn btn-success" > <span>Add New Role</span></a>						
+                </div>
+            </div>
+        </div>
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Sno</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in roledata %}                
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{r.name}}</td>
+                    <td>{{r.role}}</td>
+                    <td class="aline-inline">
+                        <table>
+                            <tr>
+                                <td>
+                                    <a href="{% url 'edit-role' r.id %}" class="btn btn-info btn-sm">Edit</a>
+                                </td>
+                            </tr>
+                        </table>
+                        <form action="{%url 'delete-role' %}" method="POST">
+                            {%csrf_token%}
+                            <input type="hidden" name="id" value={{r.id}}>
+                            <input TYPE="Submit" value="Delete" class="btn btn-sm btn-danger">
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+
+                
+                 
+            </tbody>
+        </table>
+        
+    </div>
+</div>
+
+{% endblock main_content %}
