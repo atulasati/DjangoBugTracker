@@ -52,15 +52,10 @@ WSGI_APPLICATION = 'Admin.wsgi.application'
 
 DATABASES = {
     'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'mydb',
-       'USER': 'myuser',
-       'PASSWORD': '123456',
-       'HOST': 'localhost',
-       'PORT': '5432',
-   }
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
