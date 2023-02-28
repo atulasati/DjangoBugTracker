@@ -3,7 +3,7 @@ name: Deploy Django App to Docker Container
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build_and_deploy:
@@ -21,3 +21,30 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v2
+        with:
+         context: .
+         push: true
+         tags: rohitkas/Admin:latest
+         
+      - name: ssh into ubuntu server
+        uses: appleboy/ssh-action@master
+        with:
+         host: 125.99.200.194
+         username: root
+         password: ${{ secrets.SERVER_PASSWORD }}
+         port: 22
+         
+   #   - name: Stop and remove existing Docker container
+   #     run: |
+   #       docker stop  || true
+   #       docker rm your-app-container-name || true
+
+      - name: Pull latest Docker image
+        run: docker pull rohitkas/Admin:latest
+
+      - name: Run Docker container
+        run: |
+          docker run -d --name your-app-container-name -p 8000:8000 rohitkas/Admin:latest
+  
