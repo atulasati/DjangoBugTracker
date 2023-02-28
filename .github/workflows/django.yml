@@ -26,7 +26,7 @@ jobs:
         with:
          context: .
          push: true
-         tags: rohitkas/Admin:latest
+         tags: rohitkas/admin:latest
          
       - name: ssh into ubuntu server
         uses: appleboy/ssh-action@master
