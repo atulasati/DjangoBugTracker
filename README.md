@@ -1,2 +1,3 @@
 # DjangoBugTracker
 django project
+read
